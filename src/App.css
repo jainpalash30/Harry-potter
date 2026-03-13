@@ -1,0 +1,661 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+
+:root {
+ 
+  --primary-bg: #0a0e27;           
+  --secondary-bg: #151932;         
+  --card-bg: #1a1f3a;              
+  --accent-primary: #00d9ff;       
+  --accent-secondary: #2c2fcc;     
+  --text-primary: #e2e8f0;         
+  --text-secondary: #94a3b8;       
+  --border-color: #2d3748;         
+  --success: #74a72e;              
+  --error: #ef4444;                
+  --warning: #8b6b33;             
+  
+ 
+  --gradient-primary: linear-gradient(135deg, #95a359 0%, #adaf55 100%);
+  --gradient-accent: linear-gradient(135deg, #62b1db 0%, #ed3a3a 100%);
+  
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--primary-bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.navbar {
+  background: var(--gradient-primary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0, 217, 255, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.navbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  letter-spacing: 1px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.nav-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s ease;
+  font-weight: 500;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent-primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-primary);
+  
+}
+
+.nav-link:hover::after {
+  width: 80%;
+}
+
+
+.main-content {
+  flex: 1;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+
+
+
+
+
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+
+.cache-info {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(0, 217, 255, 0.1);
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: var(--spacing-md);
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(0, 217, 255, 0.2);
+  border-top: 4px solid var(--accent-primary);
+  border-radius: 50%;
+  /* animation: spin 1s linear infinite; */
+}
+
+
+
+.loading-container p {
+  color: var(--accent-primary);
+  font-size: 1.1rem;
+}
+
+
+.error-container {
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid var(--error);
+  border-radius: var(--radius-md);
+
+  padding: var(--spacing-lg);
+  text-align: center;
+  margin: var(--spacing-lg) auto;
+  max-width: 600px;
+}
+
+.error-container h2 {
+  color: var(--error);
+  margin-bottom: var(--spacing-sm);
+}
+
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.book-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.book-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+
+
+.book-card:hover {
+ 
+  border-color: var(--accent-primary);
+}
+
+.book-cover {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.book-card h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.3rem;
+}
+
+.book-author {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: var(--spacing-xs);
+}
+
+.book-release,
+.book-pages {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.book-summary {
+  margin-top: var(--spacing-sm);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.spells-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.spell-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.spell-card::before {
+  content: '✨';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 2rem;
+  opacity: 0.15;
+}
+
+.spell-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+  border-color: var(--accent-secondary);
+}
+
+.spell-name {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.2rem;
+}
+
+.spell-type {
+  display: inline-block;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.spell-incantation {
+  color: var(--accent-secondary);
+  font-style: italic;
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.spell-effect {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.no-data {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: var(--spacing-xl);
+  font-size: 1.1rem;
+}
+
+
+.pagination-info {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.pagination-info p {
+  color: var(--text-secondary);
+  margin: var(--spacing-xs) 0;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+  flex-wrap: wrap;
+}
+
+.pagination-button {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.pagination-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.pagination-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-size: 1.1rem;
+}
+
+.page-numbers {
+  display: flex;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.page-number-button {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 40px;
+}
+
+.page-number-button:hover {
+  background: var(--accent-primary);
+  color: var(--primary-bg);
+  border-color: var(--accent-primary);
+}
+
+.page-number-button.active {
+  background: var(--gradient-accent);
+  color: white;
+  border-color: var(--accent-primary);
+}
+
+.page-dots {
+  color: var(--text-secondary);
+  padding: 0 var(--spacing-xs);
+}
+
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.character-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 217, 255, 0.3);
+  border-color: var(--accent-primary);
+}
+
+.character-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto var(--spacing-sm);
+  border: 3px solid var(--accent-primary);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+.character-card h3 {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.2rem;
+}
+
+.character-alt-names,
+.character-house,
+.character-species,
+.character-born,
+.character-ancestry {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: var(--spacing-xs) 0;
+}
+
+.label {
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+
+.houses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
+}
+
+.house-card {
+  background: var(--card-bg);
+  border: 2px solid;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.house-gryffindor {
+  border-color: #dc2626;
+}
+
+.house-hufflepuff {
+  border-color: #eab308;
+}
+
+.house-ravenclaw {
+  border-color: #43eb25;
+}
+
+.house-slytherin {
+  border-color: #16a34a;
+}
+
+.house-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 217, 255, 0.3);
+}
+
+.house-emoji {
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+  filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.5));
+}
+
+.house-card h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  font-size: 2rem;
+}
+
+.house-founder,
+.house-colors,
+.house-animal,
+.house-element,
+.house-heads {
+  color: var(--text-secondary);
+  margin: var(--spacing-sm) 0;
+}
+
+.house-traits {
+  margin-top: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.house-traits .label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.house-traits ul {
+  list-style-position: inside;
+  margin-top: var(--spacing-xs);
+  padding-left: var(--spacing-sm);
+}
+
+.house-traits li {
+  margin: var(--spacing-xs) 0;
+  color: var(--text-secondary);
+}
+
+
+.cache-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.invalidate-button {
+  background: var(--gradient-accent);
+  color: white;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 217, 255, 0.3);
+}
+
+.invalidate-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(96, 77, 192, 0.5);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+  
+  .navbar-logo {
+    font-size: 1.4rem;
+  }
+  
+  .navbar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+  
+  .nav-link {
+    font-size: 0.9rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .main-content {
+    padding: var(--spacing-md);
+  }
+  
+  .books-grid,
+  .spells-grid,
+  .characters-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .houses-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pagination-controls {
+    gap: var(--spacing-sm);
+  }
+  
+  .pagination-button {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .houses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
