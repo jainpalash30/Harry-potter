@@ -22,8 +22,6 @@ This project showcases how different data fetching and caching strategies can be
 Uses Redux + Thunk for fetching and caching book data.
 
 
- 
-
 ---
 # Install dependencies
     npm install
